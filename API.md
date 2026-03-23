@@ -16,6 +16,14 @@ generates a dataframe containing user_id, their features, baseline and treatemnt
 
 ### `make_result_df(lst)`
 
+### `get_df_long(df, id_vars, var_name, value_name)`
+
+### `get_summary(df)`
+assert df in long format
+
+### `policy_rank_modal(df, exclude)`
+tells how many times each policy wins. 
+
 
 ## `features.py`
 
@@ -41,6 +49,12 @@ Generate realized outcomes for a given policy.
 
 
 ## `plotting.py`
+
+### `plot_policy_distribution(df_long, metric, order)`
+Boxplot of policy performance with mean markers.
+
+### `plot_policy_ecdf(df_long, metric, order)`
+ECDF plot to compare distribution dominance across policies.
 
 
 ## `policy.py`
@@ -86,4 +100,4 @@ returns the dot product of features and coefficients
 
 ### `get_columns(policies)`
 
-API.md last updated at 2026-03-23_15-42-23.
+API.md last updated at 2026-03-23_17-48-30.
