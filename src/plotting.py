@@ -1,15 +1,13 @@
 import seaborn as sns
 import matplotlib.pyplot as plt
 
-
-
-
-def plot_policy_distribution(df_long, metric='outcome', order = None):
+def plot_policy_distribution(df_long, metric='outcome', order=None):
     '''
     Boxplot of policy performance with mean markers.
+    Returns: matplotlib Figure
     '''
 
-    plt.figure(figsize=(8, 5))
+    fig, ax = plt.subplots(figsize=(8, 5))
 
     if order is None:
         order = (
@@ -23,7 +21,8 @@ def plot_policy_distribution(df_long, metric='outcome', order = None):
         data=df_long,
         x='policy',
         y=metric,
-        order = order
+        order=order,
+        ax=ax
     )
 
     sns.pointplot(
@@ -34,23 +33,26 @@ def plot_policy_distribution(df_long, metric='outcome', order = None):
         color='red',
         markers='D',
         linestyles='',
-        order = order
+        order=order,
+        ax=ax
     )
 
-    plt.title(f"Policy {metric.capitalize()} Distribution")
-    plt.xlabel("Policy")
-    plt.ylabel(metric.capitalize())
-    plt.xticks(rotation=30)
+    ax.set_title(f'Policy {metric.capitalize()} Distribution')
+    ax.set_xlabel('Policy')
+    ax.set_ylabel(metric.capitalize())
+    ax.tick_params(axis='x', rotation=30)
 
-    plt.tight_layout()
-    plt.show()
+    fig.tight_layout()
 
-def plot_policy_ecdf(df_long, metric='outcome', order = None):
+    return fig
+
+def plot_policy_ecdf(df_long, metric='outcome', order=None):
     '''
     ECDF plot to compare distribution dominance across policies.
+    Returns: matplotlib Figure
     '''
 
-    plt.figure(figsize=(8, 5))
+    fig, ax = plt.subplots(figsize=(8, 5))
 
     if order is None:
         order = (
@@ -62,14 +64,16 @@ def plot_policy_ecdf(df_long, metric='outcome', order = None):
 
     for policy in order:
         subset = df_long[df_long['policy'] == policy]
-        sns.ecdfplot(subset[metric], label=policy)
+        sns.ecdfplot(subset[metric], label=policy, ax=ax)
 
-    plt.title(f"CDF of Policy {metric.capitalize()}")
-    plt.xlabel(metric.capitalize())
-    plt.ylabel("Probability")
+    ax.set_title(f'CDF of Policy {metric.capitalize()}')
+    ax.set_xlabel(metric.capitalize())
+    ax.set_ylabel('Probability')
 
-    plt.legend()
-    plt.tight_layout()
-    plt.show()
+    ax.legend()
+    fig.tight_layout()
+
+    return fig
 
 
+'''to do: currently retunring duplicate figures, fix later '''

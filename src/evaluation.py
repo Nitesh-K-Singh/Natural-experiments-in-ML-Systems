@@ -76,4 +76,7 @@ def policy_rank_modal(df, exclude=None):
     counts = df_rank[df_rank['rank'] == 1]['policy'].value_counts()
     probs = counts / counts.sum()
 
-    return probs
+    df_probs = probs.reset_index()  
+    df_probs.columns = ['policy', 'probability']
+
+    return df_probs

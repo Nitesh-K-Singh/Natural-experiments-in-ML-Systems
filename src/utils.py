@@ -4,6 +4,11 @@ import shutil
 from pathlib import Path
 from datetime import datetime
 import numpy as np
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+
 
 
 ## Config utils
@@ -141,14 +146,14 @@ def validate_config(config):
 
 # run utils
 
-def create_run_dir(config_name, author='nitesh', base_dir='results'):
+def create_run_dir(name : str, author='nitesh', base_dir='results'):
 
     '''
     creates a directory of the form {config_name}_{author}_{timestamp} in the results folder. All artifacts from this run will be stored in this directory.
     '''
 
     timestamp = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
-    run_name = f'{config_name}_{author}_{timestamp}'
+    run_name = f'{name}_{author}_{timestamp}'
     run_dir = os.path.join("..", base_dir, run_name)
 
     os.makedirs(os.path.join(run_dir, 'arguments'), exist_ok=True)
@@ -162,7 +167,7 @@ def create_run_dir(config_name, author='nitesh', base_dir='results'):
 def clear_directory(path):
 
     '''
-    clears all run directories inside results folder. Use it before oushing to git.
+    clears all run directories inside results folder. Use it before pushing to git.
     '''
     
 
@@ -202,3 +207,34 @@ def get_columns(policies):
     outcome_cols = [f"Y_{p['name']}" for p in policies]
 
     return [policy_cols, outcome_cols]
+
+
+def save_df(df: pd.DataFrame, name: str, run_dir: str):
+    df_dir = Path(run_dir) / "data"
+    df_dir.mkdir(parents=True, exist_ok=True)
+
+    file_path = df_dir / f"{name}.csv"
+    df.to_csv(file_path, index=False)
+
+    print(f"Saved DataFrame → {file_path}")
+
+    return file_path
+
+from pathlib import Path
+import matplotlib.pyplot as plt
+
+def save_plot(fig, name: str, run_dir: str):
+    """
+    Save a matplotlib Figure object to run_dir/figures as a JPG.
+    """
+
+    fig_dir = Path(run_dir) / "figures"
+    fig_dir.mkdir(parents=True, exist_ok=True)
+
+    file_path = fig_dir / f"{name}.jpg"
+    fig.savefig(file_path, bbox_inches="tight")
+    plt.close(fig)
+
+    print(f"Saved plot → {file_path}")
+    return file_path
+
