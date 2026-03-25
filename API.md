@@ -86,11 +86,11 @@ saves this config in the run directory for results folder.
 ### `validate_config(config)`
 validates if config is valid. keep adding validation as config grows complex.
 
-### `create_run_dir(config_name, author, base_dir)`
+### `create_run_dir(name, author, base_dir)`
 creates a directory of the form {config_name}_{author}_{timestamp} in the results folder. All artifacts from this run will be stored in this directory.
 
 ### `clear_directory(path)`
-clears all run directories inside results folder. Use it before oushing to git.
+clears all run directories inside results folder. Use it before pushing to git.
 
 ### `sigmoid(t)`
 returns logistic output
@@ -100,4 +100,9 @@ returns the dot product of features and coefficients
 
 ### `get_columns(policies)`
 
-API.md last updated at 2026-03-23_17-48-30.
+### `save_df(df, name, run_dir)`
+
+### `save_plot(fig, name, run_dir)`
+Save a matplotlib Figure object to run_dir/figures as a JPG.
+
+API.md last updated at 2026-03-26_00-01-47.
