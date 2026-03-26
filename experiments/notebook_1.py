@@ -15,7 +15,7 @@ from src.plotting import *
 
 
 
-def main(config_name= 'retention', num_simulations = 1000 ):
+def main(config_name= 'notebook_1', num_simulations = 1000 ):
 
     config = load_config(config_name, verbose = False)
 
@@ -26,6 +26,8 @@ def main(config_name= 'retention', num_simulations = 1000 ):
     save_config(config, run_dir)
 
     df_base = generate_environment(config)
+
+    df_base['score'] = 1 - df_base['p0'] 
 
     save_df(df_base, 'df_base' ,run_dir)
 

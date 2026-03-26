@@ -105,4 +105,4 @@ returns the dot product of features and coefficients
 ### `save_plot(fig, name, run_dir)`
 Save a matplotlib Figure object to run_dir/figures as a JPG.
 
-API.md last updated at 2026-03-26_00-01-47.
+API.md last updated at 2026-03-26_17-17-13.
