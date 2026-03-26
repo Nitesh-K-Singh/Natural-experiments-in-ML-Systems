@@ -1,0 +1,30 @@
+{
+    "I": 100000,
+    "seed": 16,
+    "features": {
+      "engagement_score": {
+        "dist": "normal",
+        "mean": 0,
+        "std": 1
+      },
+      "price_sensitivity": {
+        "dist": "normal",
+        "mean": 0,
+        "std": 1
+      }
+    },
+    "outcome_model": {
+      "baseline_coeff": [-0.2, 0.8, 0.3],
+      "treatment_coeff": [0.4, -0.7, 0.3]
+    },
+    "objective": ["retention"],
+    "profit_coeff": [],
+    "cost_coeff": [],
+    "policies": [
+      {"name": "treat_none"},
+      {"name": "treat_all"},     
+      {"name": "random", "K": 10000},
+      {"name": "score", "score_col": "score", "K": 10000},
+      {"name": "causal", "K": 10000}
+    ]
+  }
