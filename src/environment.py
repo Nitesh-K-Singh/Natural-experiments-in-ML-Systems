@@ -36,9 +36,9 @@ def generate_environment(config):
         feature_names
     )
 
-    df['p0'] = sigmoid(df['baseline_index'])
-    df['p1'] = sigmoid(df['baseline_index'] + df['treatment_index'])
+    df['oracle_p0'] = sigmoid(df['baseline_index'])
+    df['oracle_p1'] = sigmoid(df['baseline_index'] + df['treatment_index'])
 
-    df['tau'] = df['p1'] - df['p0']
+    df['oracle_tau'] = df['oracle_p1'] - df['oracle_p0']  #to be precise this is expectation of tau
 
     return df

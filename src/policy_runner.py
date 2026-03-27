@@ -5,6 +5,7 @@ def apply_policies(df, policies, seed=None):
     df = df.copy()
 
     for p in policies:
+        
         df = assign_policy(
             df,
             policy=p['name'],

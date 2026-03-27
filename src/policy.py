@@ -69,13 +69,13 @@ def assign_policy(df, policy='random', K=None, score_col=None, seed=None):
     # ---------- treatment effect targeting ----------
     if policy == 'causal':
 
-        if 'tau' not in df.columns:
+        if 'oracle_tau' not in df.columns:         #change later, maybe better to take tau col as input
             raise ValueError(" causal policy requires column 'tau'")
 
         if K is None:
             raise ValueError('K must be specified')
 
-        df = df.sort_values('tau', ascending=False)
+        df = df.sort_values('oracle_tau', ascending=False)
 
         col = f"D_{policy}"
         df[col] = 0
