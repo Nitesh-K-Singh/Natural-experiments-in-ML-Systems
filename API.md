@@ -22,13 +22,13 @@ generates a dataframe containing user_id, their features, baseline and treatemnt
 assert df in long format
 
 ### `policy_rank_modal(df, exclude)`
-tells how many times each policy wins. 
+tells how many times each policy wins.
 
 
 ## `features.py`
 
 ### `generate_features(config)`
-generates features following specification in config 
+generates features following specification in config
 
 
 ## `generate_doc.py`
@@ -39,7 +39,7 @@ generates features following specification in config
 ## `outcome_runner.py`
 
 ### `apply_realised_outcomes(df, policy_cols, Y0_col, Y1_col)`
-wrapper 
+wrapper
 
 
 ## `outcomes.py`
@@ -55,6 +55,9 @@ Boxplot of policy performance with mean markers.
 
 ### `plot_policy_ecdf(df_long, metric, order)`
 ECDF plot to compare distribution dominance across policies.
+
+### `plot_feature_space(df, x_col, y_col, color_col, ax, cmap, vmin, vmax, sample_n, title)`
+Scatter plot of (x_col, y_col) colored by color_col.
 
 
 ## `policy.py`
@@ -73,6 +76,28 @@ wrapper
 
 ### `draw_potential_outcomes(df, seed)`
 Draw potential outcomes using a single  uniform shock.
+
+
+## `report.py`
+
+### `_load_img(path)`
+
+### `_get_fig_paths(run_dir)`
+
+### `_get_data_paths(run_dir)`
+
+### `plot_feature_grid(run_map)`
+
+### `plot_distribution_grid(run_map)`
+
+### `plot_ecdf_grid(run_map)`
+
+### `get_modal_winner_df(run_map)`
+
+### `get_summary_df(run_map)`
+
+### `generate_report(run_map)`
+run_map = {
 
 
 ## `utils.py`
@@ -105,4 +130,4 @@ returns the dot product of features and coefficients
 ### `save_plot(fig, name, run_dir)`
 Save a matplotlib Figure object to run_dir/figures as a JPG.
 
-API.md last updated at 2026-03-26_17-17-13.
+API.md last updated at 2026-03-27_21-52-36.

@@ -1,0 +1,5 @@
+policy,probability
+treat_none,0.0
+score,0.0
+random,0.0
+causal,1.0

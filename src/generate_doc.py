@@ -5,6 +5,7 @@ from datetime import datetime
 src = Path("../src")
 lines = ["# API Documentation\n"]
 
+
 def generate_doc():
 
     for file in sorted(src.glob("*.py")):
@@ -19,9 +20,9 @@ def generate_doc():
                 if doc:
                     lines.append(doc.splitlines()[0])
                 lines.append("")
-    timestamp = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
+    timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
     lines.append(f"API.md last updated at {timestamp}.")
 
     Path("../API.md").write_text("\n".join(lines))
-    
+
     print("API.md  last updated at", timestamp, ".")

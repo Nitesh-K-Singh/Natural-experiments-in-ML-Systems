@@ -1,8 +1,8 @@
 import numpy as np
 
 
-def assign_policy(df, policy='random', K=None, score_col=None, seed=None):
-    '''
+def assign_policy(df, policy="random", K=None, score_col=None, seed=None):
+    """
     Assign treatment according to specified policy.
 
     Parameters
@@ -21,7 +21,7 @@ def assign_policy(df, policy='random', K=None, score_col=None, seed=None):
     Returns
     -------
     DataFrame with column 'D' (treatment indicator).
-    '''
+    """
 
     if seed is not None:
         np.random.seed(seed)
@@ -30,7 +30,7 @@ def assign_policy(df, policy='random', K=None, score_col=None, seed=None):
     N = len(df)
 
     # ---------- treat all ----------
-    if policy == 'treat_all':
+    if policy == "treat_all":
 
         K = N
 
@@ -38,9 +38,8 @@ def assign_policy(df, policy='random', K=None, score_col=None, seed=None):
         df[col] = 1
         return df
 
-
     # ---------- treat none ----------
-    if policy == 'treat_none':
+    if policy == "treat_none":
 
         K = 0
 
@@ -48,12 +47,11 @@ def assign_policy(df, policy='random', K=None, score_col=None, seed=None):
         df[col] = 0
         return df
 
-
     # ---------- random targeting ----------
-    if policy == 'random':
+    if policy == "random":
 
         if K is None:
-            raise ValueError('K must be specified for random policy')
+            raise ValueError("K must be specified for random policy")
 
         D = np.zeros(N, dtype=int)
         treated = np.random.choice(N, K, replace=False)
@@ -61,21 +59,21 @@ def assign_policy(df, policy='random', K=None, score_col=None, seed=None):
         D[treated] = 1
         col = f"D_{policy}"
         df[col] = D
-      
 
         return df
 
-
     # ---------- treatment effect targeting ----------
-    if policy == 'causal':
+    if policy == "causal":
 
-        if 'tau' not in df.columns:
+        if (
+            "oracle_tau" not in df.columns
+        ):  # change later, maybe better to take tau col as input
             raise ValueError(" causal policy requires column 'tau'")
 
         if K is None:
-            raise ValueError('K must be specified')
+            raise ValueError("K must be specified")
 
-        df = df.sort_values('tau', ascending=False)
+        df = df.sort_values("oracle_tau", ascending=False)
 
         col = f"D_{policy}"
         df[col] = 0
@@ -85,18 +83,17 @@ def assign_policy(df, policy='random', K=None, score_col=None, seed=None):
 
         return df
 
-
     # ---------- score-based policy ----------
-    if policy == 'score':
+    if policy == "score":
 
         if score_col is None:
-            raise ValueError('score_col must be provided')
+            raise ValueError("score_col must be provided")
 
         if K is None:
-            raise ValueError('K must be specified')
+            raise ValueError("K must be specified")
 
         if score_col not in df.columns:
-            raise ValueError(f'Column {score_col} not found')
+            raise ValueError(f"Column {score_col} not found")
 
         df = df.sort_values(score_col, ascending=False)
 
@@ -108,5 +105,4 @@ def assign_policy(df, policy='random', K=None, score_col=None, seed=None):
 
         return df
 
-
-    raise ValueError(f'Unknown policy: {policy}')
+    raise ValueError(f"Unknown policy: {policy}")
