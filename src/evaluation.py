@@ -79,7 +79,7 @@ def policy_rank_modal(df, exclude=None):
     all_policies = df_rank["policy"].unique()
 
     df_rank["rank"] = df_rank.groupby("run_id")["outcome"].rank(
-        ascending=False, method="first"
+        ascending=False, method="min"
     )
 
     # counts = df_rank[df_rank['rank'] == 1]['policy'].value_counts()
