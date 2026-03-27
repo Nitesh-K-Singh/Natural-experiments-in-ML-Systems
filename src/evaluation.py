@@ -66,14 +66,18 @@ def policy_rank_modal(df, exclude=None):
     ties are counted jointly
      '''
     df_rank = df.copy()
+ 
 
     if exclude is not None:
         df_rank = df_rank[~df_rank['policy'].isin(exclude)]
 
+    all_policies = df_rank['policy'].unique()
+
     df_rank['rank'] = df_rank.groupby('run_id')['outcome'] \
         .rank(ascending=False, method='first')
 
-    counts = df_rank[df_rank['rank'] == 1]['policy'].value_counts()
+    # counts = df_rank[df_rank['rank'] == 1]['policy'].value_counts()
+    counts = df_rank[df_rank['rank'] == 1]['policy'].value_counts().reindex(all_policies, fill_value=0)
     probs = counts / counts.sum()
 
     df_probs = probs.reset_index()  
