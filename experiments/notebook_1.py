@@ -1,17 +1,14 @@
 import sys
+from pathlib import Path
 
-sys.path.append("..")
-from src.utils import *
-from src.features import *
-from src.environment import *
-from src.potential_outcomes import *
-from src.policy import *
-from src.outcomes import *
-from src.policy_runner import *
-from src.outcome_runner import *
-from src.generate_doc import *
-from src.evaluation import *
-from src.plotting import *
+sys.path.append(str(Path(__file__).resolve().parent.parent))  # project root
+
+# import everything from all src modules automatically
+import importlib, pkgutil, src
+
+for finder, name, ispkg in pkgutil.walk_packages(src.__path__, prefix="src."):
+    module = importlib.import_module(name)
+    globals().update({k: v for k, v in vars(module).items() if not k.startswith("_")})
 
 
 def main(config_name: str, num_simulations=1000):
