@@ -1,8 +1,8 @@
 import numpy as np
 import pandas as pd
 
-from src.features import generate_features
-from src.utils import sigmoid, linear_index
+from src.level_0.features import generate_features
+from src.level_0.math_utils import sigmoid, linear_index
 
 
 def generate_environment(config):

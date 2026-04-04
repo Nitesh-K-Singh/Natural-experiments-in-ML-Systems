@@ -1,4 +1,4 @@
-from src.policy import assign_policy
+from src.level_0.policy import assign_policy
 
 
 def apply_policies(df, policies, seed=None):
